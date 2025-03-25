@@ -51,81 +51,44 @@
 
     <script>
         async function getAIResponse() {
-            const userInput = document.getElementById("userInput").value;
-            const responseType = document.getElementById("responseType").value;
+    const userInput = document.getElementById("userInput").value;
+    const responseType = document.getElementById("responseType").value;
 
-            if (!userInput) {
-                alert("Please enter a query!");
-                return;
-            }
+    if (!userInput) {
+        alert("Please enter a query!");
+        return;
+    }
 
-            try {
-                document.getElementById("responseContainer").classList.add("hidden");
-                document.getElementById("myChart").classList.add("hidden");
-                document.getElementById("imageContainer").classList.add("hidden");
+    try {
+        document.getElementById("responseContainer").classList.add("hidden");
+        document.getElementById("myChart").classList.add("hidden");
+        document.getElementById("imageContainer").classList.add("hidden");
 
-                const response = await fetch("/get-response", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ query: userInput, type: responseType })
-                });
+        // 🔹 REPLACE `/get-response` with your Vercel backend URL
+        const response = await fetch("https://techtradersmodel.vercel.app//get-response", { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query: userInput, type: responseType })
+        });
 
-                const data = await response.json();
-                const responseText = data.text || "No response received.";
+        const data = await response.json();
+        const responseText = data.text || "No response received.";
 
-                if (responseType === "text") {
-                    document.getElementById("responseText").innerText = responseText;
-                    document.getElementById("responseContainer").classList.remove("hidden");
-                } else if (responseType === "graph") {
-                    generateGraph(responseText);
-                } else if (responseType === "image") {
-                    generateImage(data.imageUrl);
-                }
-
-            } catch (error) {
-                console.error("Error fetching response:", error);
-                alert("Error getting AI response.");
-            }
+        if (responseType === "text") {
+            document.getElementById("responseText").innerText = responseText;
+            document.getElementById("responseContainer").classList.remove("hidden");
+        } else if (responseType === "graph") {
+            generateGraph(responseText);
+        } else if (responseType === "image") {
+            generateImage(data.imageUrl);
         }
 
-        function generateGraph(responseText) {
-            try {
-                let numbers = responseText.match(/\d+/g)?.map(Number);
-                if (!numbers || numbers.length < 2) {
-                    alert("AI did not provide enough data for a graph.");
-                    return;
-                }
+    } catch (error) {
+        console.error("Error fetching response:", error);
+        alert("Error getting AI response.");
+    }
+}
 
-                const ctx = document.getElementById('myChart').getContext('2d');
-                document.getElementById("myChart").classList.remove("hidden");
-
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: numbers.map((_, i) => "Data " + (i + 1)),
-                        datasets: [{
-                            label: 'Generated Graph Data',
-                            data: numbers,
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    }
-                });
-
-            } catch (error) {
-                console.error("Error generating graph:", error);
-            }
-        }
-
-        function generateImage(imageUrl) {
-            if (imageUrl) {
-                document.getElementById("generatedImage").src = imageUrl;
-                document.getElementById("imageContainer").classList.remove("hidden");
-            } else {
-                alert("AI did not generate an image.");
-            }
-        }
     </script>
 
 </body>
