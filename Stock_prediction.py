@@ -1,995 +1,651 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "44ad9fb4-7992-43ab-8247-dcbdb3a859fe",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "✅ Using device: cpu\n",
-      "\n",
-      "🔹 Columns in stock_data: ['date', 'open', 'high', 'low', 'close', 'volume']\n",
-      "\n",
-      "🔹 Columns in news_data: ['date', 'title', 'news_summary']\n",
-      "\n",
-      "🔹 Columns in new_news_data: ['date', 'title', 'news_summary']\n",
-      "\n",
-      "🔹 Columns in actual_data: ['date', 'close']\n",
-      "\n",
-      "✅ Training on stock data from 2019 to 2024\n"
-     ]
-    },
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "Device set to use cpu\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "WARNING:tensorflow:From C:\\Users\\Rishi\\anaconda3\\envs\\stonks\\lib\\site-packages\\keras\\src\\layers\\rnn\\lstm.py:148: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.\n",
-      "\n",
-      "WARNING:tensorflow:From C:\\Users\\Rishi\\anaconda3\\envs\\stonks\\lib\\site-packages\\keras\\src\\optimizers\\__init__.py:309: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.\n",
-      "\n",
-      "\n",
-      "✅ Training LSTM model on stock data...\n",
-      "Epoch 1/150\n",
-      "WARNING:tensorflow:From C:\\Users\\Rishi\\anaconda3\\envs\\stonks\\lib\\site-packages\\keras\\src\\utils\\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.\n",
-      "\n",
-      "13/13 [==============================] - 1s 3ms/step - loss: 10644.9160\n",
-      "Epoch 2/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 10543.8516\n",
-      "Epoch 3/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 10252.2500\n",
-      "Epoch 4/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 9389.4736\n",
-      "Epoch 5/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 7385.7969\n",
-      "Epoch 6/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 3889.0342\n",
-      "Epoch 7/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 1276.2317\n",
-      "Epoch 8/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 813.1219\n",
-      "Epoch 9/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 538.7452\n",
-      "Epoch 10/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 418.9518\n",
-      "Epoch 11/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 356.8071\n",
-      "Epoch 12/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 316.8936\n",
-      "Epoch 13/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 290.8032\n",
-      "Epoch 14/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 281.1995\n",
-      "Epoch 15/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 268.9964\n",
-      "Epoch 16/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 264.2818\n",
-      "Epoch 17/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 262.3959\n",
-      "Epoch 18/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 256.8619\n",
-      "Epoch 19/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 255.3463\n",
-      "Epoch 20/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 253.8070\n",
-      "Epoch 21/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 250.8397\n",
-      "Epoch 22/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 250.5716\n",
-      "Epoch 23/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 245.9378\n",
-      "Epoch 24/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 249.2375\n",
-      "Epoch 25/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 247.1753\n",
-      "Epoch 26/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 246.6460\n",
-      "Epoch 27/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 244.7710\n",
-      "Epoch 28/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 241.6170\n",
-      "Epoch 29/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 239.7738\n",
-      "Epoch 30/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 240.4974\n",
-      "Epoch 31/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 240.3161\n",
-      "Epoch 32/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 236.2323\n",
-      "Epoch 33/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 237.1763\n",
-      "Epoch 34/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 235.8932\n",
-      "Epoch 35/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 234.3362\n",
-      "Epoch 36/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 232.7421\n",
-      "Epoch 37/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 233.0824\n",
-      "Epoch 38/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 232.1966\n",
-      "Epoch 39/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 229.7360\n",
-      "Epoch 40/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 230.9365\n",
-      "Epoch 41/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 225.0593\n",
-      "Epoch 42/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 227.0496\n",
-      "Epoch 43/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 226.4070\n",
-      "Epoch 44/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 227.0319\n",
-      "Epoch 45/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 225.5934\n",
-      "Epoch 46/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 227.7867\n",
-      "Epoch 47/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 223.8878\n",
-      "Epoch 48/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 223.0506\n",
-      "Epoch 49/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 225.3570\n",
-      "Epoch 50/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 224.4248\n",
-      "Epoch 51/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 218.5060\n",
-      "Epoch 52/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 221.2171\n",
-      "Epoch 53/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 220.4803\n",
-      "Epoch 54/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 220.3006\n",
-      "Epoch 55/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 222.3235\n",
-      "Epoch 56/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 221.1068\n",
-      "Epoch 57/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 229.8400\n",
-      "Epoch 58/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 219.9326\n",
-      "Epoch 59/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 216.4894\n",
-      "Epoch 60/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 218.3569\n",
-      "Epoch 61/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 213.1601\n",
-      "Epoch 62/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 212.2700\n",
-      "Epoch 63/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 210.5634\n",
-      "Epoch 64/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 213.5131\n",
-      "Epoch 65/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 210.3338\n",
-      "Epoch 66/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 211.3995\n",
-      "Epoch 67/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 216.6066\n",
-      "Epoch 68/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 211.7013\n",
-      "Epoch 69/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 212.5899\n",
-      "Epoch 70/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 216.7480\n",
-      "Epoch 71/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 214.0468\n",
-      "Epoch 72/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 207.5393\n",
-      "Epoch 73/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 206.6886\n",
-      "Epoch 74/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 209.6465\n",
-      "Epoch 75/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 206.2991\n",
-      "Epoch 76/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 203.5498\n",
-      "Epoch 77/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 202.1955\n",
-      "Epoch 78/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 200.3095\n",
-      "Epoch 79/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 210.7612\n",
-      "Epoch 80/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 204.1163\n",
-      "Epoch 81/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 200.8533\n",
-      "Epoch 82/150\n",
-      "13/13 [==============================] - 0s 1ms/step - loss: 199.4424\n",
-      "Epoch 83/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 203.9069\n",
-      "Epoch 84/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 197.8361\n",
-      "Epoch 85/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 196.7410\n",
-      "Epoch 86/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 196.7233\n",
-      "Epoch 87/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 194.4577\n",
-      "Epoch 88/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 193.0863\n",
-      "Epoch 89/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 197.7516\n",
-      "Epoch 90/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 200.0966\n",
-      "Epoch 91/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 196.7248\n",
-      "Epoch 92/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 195.8837\n",
-      "Epoch 93/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 191.4532\n",
-      "Epoch 94/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 191.8518\n",
-      "Epoch 95/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 192.3091\n",
-      "Epoch 96/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 187.4590\n",
-      "Epoch 97/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 186.3267\n",
-      "Epoch 98/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 187.4238\n",
-      "Epoch 99/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 191.9592\n",
-      "Epoch 100/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 187.9766\n",
-      "Epoch 101/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 185.5861\n",
-      "Epoch 102/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 182.5392\n",
-      "Epoch 103/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 182.1287\n",
-      "Epoch 104/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 181.3565\n",
-      "Epoch 105/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 187.4795\n",
-      "Epoch 106/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 182.4354\n",
-      "Epoch 107/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 190.7093\n",
-      "Epoch 108/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 184.9809\n",
-      "Epoch 109/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 184.1504\n",
-      "Epoch 110/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 195.2646\n",
-      "Epoch 111/150\n",
-      "13/13 [==============================] - 0s 1ms/step - loss: 181.3024\n",
-      "Epoch 112/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 176.9484\n",
-      "Epoch 113/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 177.9572\n",
-      "Epoch 114/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 183.0391\n",
-      "Epoch 115/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 187.7292\n",
-      "Epoch 116/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 179.1025\n",
-      "Epoch 117/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 177.2962\n",
-      "Epoch 118/150\n",
-      "13/13 [==============================] - 0s 1ms/step - loss: 177.2474\n",
-      "Epoch 119/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 177.2356\n",
-      "Epoch 120/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 179.9139\n",
-      "Epoch 121/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 180.3686\n",
-      "Epoch 122/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 183.7756\n",
-      "Epoch 123/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 175.8105\n",
-      "Epoch 124/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 172.7754\n",
-      "Epoch 125/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 174.6016\n",
-      "Epoch 126/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 172.0106\n",
-      "Epoch 127/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 173.0587\n",
-      "Epoch 128/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 180.5517\n",
-      "Epoch 129/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 172.8864\n",
-      "Epoch 130/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 174.5259\n",
-      "Epoch 131/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.0677\n",
-      "Epoch 132/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.1938\n",
-      "Epoch 133/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 174.6228\n",
-      "Epoch 134/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 167.8941\n",
-      "Epoch 135/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.5374\n",
-      "Epoch 136/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 176.7401\n",
-      "Epoch 137/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.8456\n",
-      "Epoch 138/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.9015\n",
-      "Epoch 139/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 171.5798\n",
-      "Epoch 140/150\n",
-      "13/13 [==============================] - 0s 1ms/step - loss: 183.1207\n",
-      "Epoch 141/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 179.3544\n",
-      "Epoch 142/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 170.1519\n",
-      "Epoch 143/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 180.1423\n",
-      "Epoch 144/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 172.6913\n",
-      "Epoch 145/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 163.1486\n",
-      "Epoch 146/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 162.5288\n",
-      "Epoch 147/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 163.7764\n",
-      "Epoch 148/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 165.3280\n",
-      "Epoch 149/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 168.9547\n",
-      "Epoch 150/150\n",
-      "13/13 [==============================] - 0s 2ms/step - loss: 165.8363\n",
-      "1/1 [==============================] - 0s 224ms/step\n",
-      "\n",
-      "✅ Stock Price Predictions Saved Successfully!\n",
-      "        date  sentiment  predicted_close\n",
-      "0 2024-01-01        0.2       109.652603\n",
-      "\n",
-      "❌ Not enough data to calculate evaluation metrics.\n",
-      "\n",
-      "❌ No data available to plot.\n"
-     ]
+import streamlit as st
+import pandas as pd
+import numpy as np
+import os
+import warnings
+from datetime import datetime, timedelta
+
+# Suppress warnings
+warnings.filterwarnings('ignore')
+
+# Try importing ML libraries with error handling
+try:
+    import tensorflow as tf
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import LSTM, Dense
+    TF_AVAILABLE = True
+except ImportError:
+    st.error("TensorFlow not installed. Please install: pip install tensorflow")
+    TF_AVAILABLE = False
+
+try:
+    from transformers import pipeline
+    import torch
+    TRANSFORMERS_AVAILABLE = True
+except ImportError:
+    st.error("Transformers not installed. Please install: pip install transformers torch")
+    TRANSFORMERS_AVAILABLE = False
+
+try:
+    import matplotlib.pyplot as plt
+    import plotly.graph_objects as go
+    import plotly.express as px
+    PLOTTING_AVAILABLE = True
+except ImportError:
+    st.error("Plotting libraries not installed. Please install: pip install matplotlib plotly")
+    PLOTTING_AVAILABLE = False
+
+try:
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+    SKLEARN_AVAILABLE = True
+except ImportError:
+    st.error("Scikit-learn not installed. Please install: pip install scikit-learn")
+    SKLEARN_AVAILABLE = False
+
+# Set page configuration
+st.set_page_config(
+    page_title="Stock Price Prediction Dashboard",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Custom CSS for better styling
+st.markdown("""
+<style>
+    .main-header {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #1f77b4;
+        text-align: center;
+        margin-bottom: 2rem;
     }
-   ],
-   "source": [
-    "import streamlit as st\n",
-    "import pandas as pd\n",
-    "import numpy as np\n",
-    "import tensorflow as tf\n",
-    "from tensorflow.keras.models import Sequential\n",
-    "from tensorflow.keras.layers import LSTM, Dense\n",
-    "from transformers import pipeline\n",
-    "import torch\n",
-    "import matplotlib.pyplot as plt\n",
-    "import plotly.graph_objects as go\n",
-    "import plotly.express as px\n",
-    "from sklearn.preprocessing import StandardScaler\n",
-    "from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score\n",
-    "import os\n",
-    "from datetime import datetime, timedelta\n",
-    "import warnings\n",
-    "warnings.filterwarnings('ignore')\n",
-    "\n",
-    "# Set page configuration\n",
-    "st.set_page_config(\n",
-    "    page_title=\"Stock Price Prediction Dashboard\",\n",
-    "    page_icon=\"📈\",\n",
-    "    layout=\"wide\",\n",
-    "    initial_sidebar_state=\"expanded\"\n",
-    ")\n",
-    "\n",
-    "# Custom CSS for better styling\n",
-    "st.markdown(\"\"\"\n",
-    "<style>\n",
-    "    .main-header {\n",
-    "        font-size: 2.5rem;\n",
-    "        font-weight: bold;\n",
-    "        color: #1f77b4;\n",
-    "        text-align: center;\n",
-    "        margin-bottom: 2rem;\n",
-    "    }\n",
-    "    .metric-card {\n",
-    "        background-color: #f0f2f6;\n",
-    "        padding: 1rem;\n",
-    "        border-radius: 0.5rem;\n",
-    "        border-left: 4px solid #1f77b4;\n",
-    "    }\n",
-    "    .success-message {\n",
-    "        background-color: #d4edda;\n",
-    "        color: #155724;\n",
-    "        padding: 1rem;\n",
-    "        border-radius: 0.5rem;\n",
-    "        border-left: 4px solid #28a745;\n",
-    "    }\n",
-    "    .error-message {\n",
-    "        background-color: #f8d7da;\n",
-    "        color: #721c24;\n",
-    "        padding: 1rem;\n",
-    "        border-radius: 0.5rem;\n",
-    "        border-left: 4px solid #dc3545;\n",
-    "    }\n",
-    "</style>\n",
-    "\"\"\", unsafe_allow_html=True)\n",
-    "\n",
-    "# Initialize session state\n",
-    "if 'model_trained' not in st.session_state:\n",
-    "    st.session_state.model_trained = False\n",
-    "if 'predictions_made' not in st.session_state:\n",
-    "    st.session_state.predictions_made = False\n",
-    "if 'scaler' not in st.session_state:\n",
-    "    st.session_state.scaler = None\n",
-    "if 'model' not in st.session_state:\n",
-    "    st.session_state.model = None\n",
-    "\n",
-    "# Main title\n",
-    "st.markdown('<div class=\"main-header\">📈 Stock Price Prediction Dashboard</div>', unsafe_allow_html=True)\n",
-    "\n",
-    "# Sidebar for navigation\n",
-    "st.sidebar.title(\"Navigation\")\n",
-    "page = st.sidebar.selectbox(\n",
-    "    \"Choose a section:\",\n",
-    "    [\"📊 Dashboard\", \"🔄 Data Processing\", \"🤖 Model Training\", \"📈 Predictions\", \"📋 Results Analysis\"]\n",
-    ")\n",
-    "\n",
-    "# Helper functions\n",
-    "@st.cache_data\n",
-    "def load_csv_file(file_path):\n",
-    "    \"\"\"Load CSV file and standardize column names\"\"\"\n",
-    "    try:\n",
-    "        df = pd.read_csv(file_path)\n",
-    "        df.columns = df.columns.str.strip().str.lower()\n",
-    "        return df\n",
-    "    except Exception as e:\n",
-    "        st.error(f\"Error loading {file_path}: {str(e)}\")\n",
-    "        return None\n",
-    "\n",
-    "@st.cache_resource\n",
-    "def load_sentiment_model():\n",
-    "    \"\"\"Load sentiment analysis model\"\"\"\n",
-    "    try:\n",
-    "        device = -1 if not torch.cuda.is_available() else 0\n",
-    "        return pipeline(\"sentiment-analysis\", \n",
-    "                       model=\"distilbert-base-uncased-finetuned-sst-2-english\", \n",
-    "                       device=device)\n",
-    "    except Exception as e:\n",
-    "        st.error(f\"Error loading sentiment model: {str(e)}\")\n",
-    "        return None\n",
-    "\n",
-    "def get_sentiment(text, sentiment_pipeline):\n",
-    "    \"\"\"Get sentiment score for text\"\"\"\n",
-    "    try:\n",
-    "        result = sentiment_pipeline(text)[0][\"label\"]\n",
-    "        return 1 if result == \"POSITIVE\" else (-1 if result == \"NEGATIVE\" else 0)\n",
-    "    except Exception:\n",
-    "        return 0\n",
-    "\n",
-    "def build_lstm_model(input_shape):\n",
-    "    \"\"\"Build LSTM model\"\"\"\n",
-    "    model = Sequential([\n",
-    "        LSTM(256, input_shape=input_shape, return_sequences=False),\n",
-    "        Dense(128, activation=\"relu\"),\n",
-    "        Dense(64, activation=\"relu\"),\n",
-    "        Dense(1)\n",
-    "    ])\n",
-    "    model.compile(loss=\"mean_squared_error\", optimizer=\"adam\")\n",
-    "    return model\n",
-    "\n",
-    "# Dashboard Page\n",
-    "if page == \"📊 Dashboard\":\n",
-    "    st.header(\"Welcome to Stock Price Prediction Dashboard\")\n",
-    "    \n",
-    "    col1, col2, col3 = st.columns(3)\n",
-    "    \n",
-    "    with col1:\n",
-    "        st.markdown(\"\"\"\n",
-    "        <div class=\"metric-card\">\n",
-    "            <h3>🎯 Purpose</h3>\n",
-    "            <p>Predict stock prices using LSTM neural networks and sentiment analysis from news data.</p>\n",
-    "        </div>\n",
-    "        \"\"\", unsafe_allow_html=True)\n",
-    "    \n",
-    "    with col2:\n",
-    "        st.markdown(\"\"\"\n",
-    "        <div class=\"metric-card\">\n",
-    "            <h3>🔧 Features</h3>\n",
-    "            <p>• LSTM Deep Learning Model<br>\n",
-    "            • Sentiment Analysis<br>\n",
-    "            • Technical Indicators<br>\n",
-    "            • Interactive Visualizations</p>\n",
-    "        </div>\n",
-    "        \"\"\", unsafe_allow_html=True)\n",
-    "    \n",
-    "    with col3:\n",
-    "        st.markdown(\"\"\"\n",
-    "        <div class=\"metric-card\">\n",
-    "            <h3>📈 Workflow</h3>\n",
-    "            <p>1. Load Data<br>\n",
-    "            2. Process & Analyze<br>\n",
-    "            3. Train Model<br>\n",
-    "            4. Make Predictions</p>\n",
-    "        </div>\n",
-    "        \"\"\", unsafe_allow_html=True)\n",
-    "    \n",
-    "    st.markdown(\"---\")\n",
-    "    st.subheader(\"Quick Start Guide\")\n",
-    "    st.markdown(\"\"\"\n",
-    "    1. **Data Processing**: Upload your CSV files and process the data\n",
-    "    2. **Model Training**: Train the LSTM model on historical stock data\n",
-    "    3. **Predictions**: Generate predictions for new data\n",
-    "    4. **Results Analysis**: View and analyze the results\n",
-    "    \"\"\")\n",
-    "    \n",
-    "    # System Information\n",
-    "    st.subheader(\"System Information\")\n",
-    "    col1, col2 = st.columns(2)\n",
-    "    \n",
-    "    with col1:\n",
-    "        device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n",
-    "        st.info(f\"🖥️ Computing Device: {device}\")\n",
-    "    \n",
-    "    with col2:\n",
-    "        tf_version = tf.__version__\n",
-    "        st.info(f\"🧠 TensorFlow Version: {tf_version}\")\n",
-    "\n",
-    "# Data Processing Page\n",
-    "elif page == \"🔄 Data Processing\":\n",
-    "    st.header(\"Data Processing & Loading\")\n",
-    "    \n",
-    "    # File upload section\n",
-    "    st.subheader(\"📁 Upload Data Files\")\n",
-    "    \n",
-    "    col1, col2 = st.columns(2)\n",
-    "    \n",
-    "    with col1:\n",
-    "        stock_file = st.file_uploader(\"Upload Stock Data CSV\", type=['csv'], key=\"stock\")\n",
-    "        news_file = st.file_uploader(\"Upload News Data CSV\", type=['csv'], key=\"news\")\n",
-    "    \n",
-    "    with col2:\n",
-    "        new_news_file = st.file_uploader(\"Upload New News Data CSV\", type=['csv'], key=\"new_news\")\n",
-    "        actual_file = st.file_uploader(\"Upload Actual Data CSV\", type=['csv'], key=\"actual\")\n",
-    "    \n",
-    "    # Process uploaded files\n",
-    "    if st.button(\"🔄 Process Data\", type=\"primary\"):\n",
-    "        if all([stock_file, news_file, new_news_file, actual_file]):\n",
-    "            try:\n",
-    "                # Load data\n",
-    "                stock_data = pd.read_csv(stock_file)\n",
-    "                news_data = pd.read_csv(news_file)\n",
-    "                new_news_data = pd.read_csv(new_news_file)\n",
-    "                actual_data = pd.read_csv(actual_file)\n",
-    "                \n",
-    "                # Standardize column names\n",
-    "                for df in [stock_data, news_data, new_news_data, actual_data]:\n",
-    "                    df.columns = df.columns.str.strip().str.lower()\n",
-    "                \n",
-    "                # Store in session state\n",
-    "                st.session_state.stock_data = stock_data\n",
-    "                st.session_state.news_data = news_data\n",
-    "                st.session_state.new_news_data = new_news_data\n",
-    "                st.session_state.actual_data = actual_data\n",
-    "                \n",
-    "                st.success(\"✅ Data loaded successfully!\")\n",
-    "                \n",
-    "                # Display data info\n",
-    "                st.subheader(\"📊 Data Overview\")\n",
-    "                \n",
-    "                tab1, tab2, tab3, tab4 = st.tabs([\"Stock Data\", \"News Data\", \"New News Data\", \"Actual Data\"])\n",
-    "                \n",
-    "                with tab1:\n",
-    "                    st.write(f\"**Shape:** {stock_data.shape}\")\n",
-    "                    st.write(f\"**Columns:** {stock_data.columns.tolist()}\")\n",
-    "                    st.dataframe(stock_data.head())\n",
-    "                \n",
-    "                with tab2:\n",
-    "                    st.write(f\"**Shape:** {news_data.shape}\")\n",
-    "                    st.write(f\"**Columns:** {news_data.columns.tolist()}\")\n",
-    "                    st.dataframe(news_data.head())\n",
-    "                \n",
-    "                with tab3:\n",
-    "                    st.write(f\"**Shape:** {new_news_data.shape}\")\n",
-    "                    st.write(f\"**Columns:** {new_news_data.columns.tolist()}\")\n",
-    "                    st.dataframe(new_news_data.head())\n",
-    "                \n",
-    "                with tab4:\n",
-    "                    st.write(f\"**Shape:** {actual_data.shape}\")\n",
-    "                    st.write(f\"**Columns:** {actual_data.columns.tolist()}\")\n",
-    "                    st.dataframe(actual_data.head())\n",
-    "                \n",
-    "            except Exception as e:\n",
-    "                st.error(f\"❌ Error processing data: {str(e)}\")\n",
-    "        else:\n",
-    "            st.warning(\"⚠️ Please upload all required CSV files.\")\n",
-    "\n",
-    "# Model Training Page\n",
-    "elif page == \"🤖 Model Training\":\n",
-    "    st.header(\"Model Training\")\n",
-    "    \n",
-    "    if 'stock_data' not in st.session_state:\n",
-    "        st.warning(\"⚠️ Please load data first in the Data Processing section.\")\n",
-    "    else:\n",
-    "        stock_data = st.session_state.stock_data.copy()\n",
-    "        news_data = st.session_state.news_data.copy()\n",
-    "        \n",
-    "        # Data preprocessing\n",
-    "        st.subheader(\"📊 Data Preprocessing\")\n",
-    "        \n",
-    "        with st.expander(\"View Preprocessing Steps\"):\n",
-    "            st.write(\"1. Convert date columns to datetime format\")\n",
-    "            st.write(\"2. Filter stock data from 2019-2024\")\n",
-    "            st.write(\"3. Add technical indicators\")\n",
-    "            st.write(\"4. Perform sentiment analysis on news data\")\n",
-    "            st.write(\"5. Merge stock and news data\")\n",
-    "            st.write(\"6. Scale features\")\n",
-    "        \n",
-    "        if st.button(\"🔄 Start Preprocessing\", type=\"primary\"):\n",
-    "            progress_bar = st.progress(0)\n",
-    "            status_text = st.empty()\n",
-    "            \n",
-    "            try:\n",
-    "                # Convert dates\n",
-    "                status_text.text(\"Converting date formats...\")\n",
-    "                progress_bar.progress(20)\n",
-    "                \n",
-    "                for df in [stock_data, news_data]:\n",
-    "                    df[\"date\"] = pd.to_datetime(df[\"date\"].astype(str), errors=\"coerce\")\n",
-    "                \n",
-    "                # Filter stock data\n",
-    "                stock_data = stock_data[stock_data[\"date\"] >= \"2019-01-01\"]\n",
-    "                progress_bar.progress(40)\n",
-    "                \n",
-    "                # Add technical indicators\n",
-    "                status_text.text(\"Adding technical indicators...\")\n",
-    "                stock_data[\"daily_change\"] = stock_data[\"close\"] - stock_data[\"open\"]\n",
-    "                stock_data[\"volatility\"] = stock_data[\"high\"] - stock_data[\"low\"]\n",
-    "                stock_data[\"50_day_MA\"] = stock_data[\"close\"].rolling(window=50).mean()\n",
-    "                stock_data[\"200_day_MA\"] = stock_data[\"close\"].rolling(window=200).mean()\n",
-    "                stock_data.fillna(0, inplace=True)\n",
-    "                progress_bar.progress(60)\n",
-    "                \n",
-    "                # Sentiment analysis\n",
-    "                status_text.text(\"Performing sentiment analysis...\")\n",
-    "                sentiment_pipeline = load_sentiment_model()\n",
-    "                \n",
-    "                if sentiment_pipeline:\n",
-    "                    news_data[\"sentiment\"] = news_data[\"news_summary\"].apply(\n",
-    "                        lambda x: get_sentiment(x, sentiment_pipeline)\n",
-    "                    )\n",
-    "                    news_data = news_data.groupby(\"date\").agg({\"sentiment\": \"mean\"}).reset_index()\n",
-    "                    progress_bar.progress(80)\n",
-    "                    \n",
-    "                    # Merge data\n",
-    "                    status_text.text(\"Merging datasets...\")\n",
-    "                    merged_data = pd.merge(stock_data, news_data, on=\"date\", how=\"left\").fillna(0)\n",
-    "                    \n",
-    "                    # Prepare features\n",
-    "                    features = [\"sentiment\", \"volume\", \"daily_change\", \"volatility\", \"50_day_MA\", \"200_day_MA\"]\n",
-    "                    X_train = merged_data[features]\n",
-    "                    y_train = merged_data[\"close\"]\n",
-    "                    \n",
-    "                    # Scale features\n",
-    "                    scaler = StandardScaler()\n",
-    "                    X_train_scaled = scaler.fit_transform(X_train)\n",
-    "                    X_train_scaled = np.reshape(X_train_scaled, (X_train_scaled.shape[0], 1, X_train_scaled.shape[1]))\n",
-    "                    \n",
-    "                    st.session_state.X_train = X_train_scaled\n",
-    "                    st.session_state.y_train = y_train\n",
-    "                    st.session_state.scaler = scaler\n",
-    "                    st.session_state.features = features\n",
-    "                    \n",
-    "                    progress_bar.progress(100)\n",
-    "                    status_text.text(\"Preprocessing completed!\")\n",
-    "                    \n",
-    "                    st.success(\"✅ Data preprocessing completed successfully!\")\n",
-    "                    \n",
-    "                    # Display preprocessing results\n",
-    "                    col1, col2, col3 = st.columns(3)\n",
-    "                    \n",
-    "                    with col1:\n",
-    "                        st.metric(\"Training Samples\", len(X_train_scaled))\n",
-    "                    \n",
-    "                    with col2:\n",
-    "                        st.metric(\"Features\", len(features))\n",
-    "                    \n",
-    "                    with col3:\n",
-    "                        st.metric(\"Date Range\", f\"{merged_data['date'].min().strftime('%Y-%m-%d')} to {merged_data['date'].max().strftime('%Y-%m-%d')}\")\n",
-    "                \n",
-    "            except Exception as e:\n",
-    "                st.error(f\"❌ Error during preprocessing: {str(e)}\")\n",
-    "        \n",
-    "        # Model training section\n",
-    "        if 'X_train' in st.session_state:\n",
-    "            st.subheader(\"🧠 LSTM Model Training\")\n",
-    "            \n",
-    "            col1, col2 = st.columns(2)\n",
-    "            \n",
-    "            with col1:\n",
-    "                epochs = st.slider(\"Number of Epochs\", 50, 300, 150)\n",
-    "                batch_size = st.selectbox(\"Batch Size\", [16, 32, 64, 128], index=1)\n",
-    "            \n",
-    "            with col2:\n",
-    "                lstm_units = st.slider(\"LSTM Units\", 128, 512, 256)\n",
-    "                dense_units = st.slider(\"Dense Units\", 64, 256, 128)\n",
-    "            \n",
-    "            if st.button(\"🚀 Train Model\", type=\"primary\"):\n",
-    "                try:\n",
-    "                    # Build model\n",
-    "                    model = Sequential([\n",
-    "                        LSTM(lstm_units, input_shape=(1, len(st.session_state.features)), return_sequences=False),\n",
-    "                        Dense(dense_units, activation=\"relu\"),\n",
-    "                        Dense(64, activation=\"relu\"),\n",
-    "                        Dense(1)\n",
-    "                    ])\n",
-    "                    model.compile(loss=\"mean_squared_error\", optimizer=\"adam\")\n",
-    "                    \n",
-    "                    # Training progress\n",
-    "                    progress_bar = st.progress(0)\n",
-    "                    status_text = st.empty()\n",
-    "                    \n",
-    "                    # Custom callback for progress\n",
-    "                    class StreamlitCallback(tf.keras.callbacks.Callback):\n",
-    "                        def on_epoch_end(self, epoch, logs=None):\n",
-    "                            progress = (epoch + 1) / epochs\n",
-    "                            progress_bar.progress(progress)\n",
-    "                            status_text.text(f\"Training... Epoch {epoch + 1}/{epochs} - Loss: {logs['loss']:.4f}\")\n",
-    "                    \n",
-    "                    # Train model\n",
-    "                    history = model.fit(\n",
-    "                        st.session_state.X_train, \n",
-    "                        st.session_state.y_train,\n",
-    "                        epochs=epochs,\n",
-    "                        batch_size=batch_size,\n",
-    "                        verbose=0,\n",
-    "                        callbacks=[StreamlitCallback()]\n",
-    "                    )\n",
-    "                    \n",
-    "                    st.session_state.model = model\n",
-    "                    st.session_state.model_trained = True\n",
-    "                    st.session_state.training_history = history.history\n",
-    "                    \n",
-    "                    st.success(\"✅ Model trained successfully!\")\n",
-    "                    \n",
-    "                    # Display training results\n",
-    "                    fig = go.Figure()\n",
-    "                    fig.add_trace(go.Scatter(\n",
-    "                        y=history.history['loss'],\n",
-    "                        mode='lines',\n",
-    "                        name='Training Loss',\n",
-    "                        line=dict(color='blue')\n",
-    "                    ))\n",
-    "                    fig.update_layout(\n",
-    "                        title=\"Training Loss Over Time\",\n",
-    "                        xaxis_title=\"Epoch\",\n",
-    "                        yaxis_title=\"Loss\"\n",
-    "                    )\n",
-    "                    st.plotly_chart(fig, use_container_width=True)\n",
-    "                    \n",
-    "                except Exception as e:\n",
-    "                    st.error(f\"❌ Error during training: {str(e)}\")\n",
-    "\n",
-    "# Predictions Page\n",
-    "elif page == \"📈 Predictions\":\n",
-    "    st.header(\"Stock Price Predictions\")\n",
-    "    \n",
-    "    if not st.session_state.model_trained:\n",
-    "        st.warning(\"⚠️ Please train the model first in the Model Training section.\")\n",
-    "    else:\n",
-    "        if st.button(\"🔮 Generate Predictions\", type=\"primary\"):\n",
-    "            try:\n",
-    "                new_news_data = st.session_state.new_news_data.copy()\n",
-    "                \n",
-    "                # Convert date\n",
-    "                new_news_data[\"date\"] = pd.to_datetime(new_news_data[\"date\"].astype(str), errors=\"coerce\")\n",
-    "                \n",
-    "                # Sentiment analysis\n",
-    "                sentiment_pipeline = load_sentiment_model()\n",
-    "                if sentiment_pipeline:\n",
-    "                    new_news_data[\"sentiment\"] = new_news_data[\"news_summary\"].apply(\n",
-    "                        lambda x: get_sentiment(x, sentiment_pipeline)\n",
-    "                    )\n",
-    "                    new_news_data = new_news_data.groupby(\"date\").agg({\"sentiment\": \"mean\"}).reset_index()\n",
-    "                    \n",
-    "                    # Add last known stock features\n",
-    "                    latest_stock_data = st.session_state.stock_data.iloc[-1]\n",
-    "                    for col in [\"volume\", \"daily_change\", \"volatility\", \"50_day_MA\", \"200_day_MA\"]:\n",
-    "                        new_news_data[col] = latest_stock_data[col]\n",
-    "                    \n",
-    "                    # Scale and predict\n",
-    "                    X_test = st.session_state.scaler.transform(new_news_data[st.session_state.features])\n",
-    "                    X_test = np.reshape(X_test, (X_test.shape[0], 1, X_test.shape[1]))\n",
-    "                    \n",
-    "                    predicted_prices = st.session_state.model.predict(X_test)\n",
-    "                    new_news_data[\"predicted_close\"] = predicted_prices\n",
-    "                    \n",
-    "                    st.session_state.predictions = new_news_data\n",
-    "                    st.session_state.predictions_made = True\n",
-    "                    \n",
-    "                    st.success(\"✅ Predictions generated successfully!\")\n",
-    "                    \n",
-    "                    # Display predictions\n",
-    "                    st.subheader(\"📊 Prediction Results\")\n",
-    "                    \n",
-    "                    # Create prediction chart\n",
-    "                    fig = go.Figure()\n",
-    "                    fig.add_trace(go.Scatter(\n",
-    "                        x=new_news_data[\"date\"],\n",
-    "                        y=new_news_data[\"predicted_close\"],\n",
-    "                        mode='lines+markers',\n",
-    "                        name='Predicted Close Price',\n",
-    "                        line=dict(color='blue', width=2)\n",
-    "                    ))\n",
-    "                    fig.update_layout(\n",
-    "                        title=\"Predicted Stock Prices\",\n",
-    "                        xaxis_title=\"Date\",\n",
-    "                        yaxis_title=\"Stock Price\",\n",
-    "                        hovermode='x unified'\n",
-    "                    )\n",
-    "                    st.plotly_chart(fig, use_container_width=True)\n",
-    "                    \n",
-    "                    # Display prediction table\n",
-    "                    st.dataframe(new_news_data[[\"date\", \"sentiment\", \"predicted_close\"]])\n",
-    "                    \n",
-    "                    # Download predictions\n",
-    "                    csv = new_news_data.to_csv(index=False)\n",
-    "                    st.download_button(\n",
-    "                        label=\"📥 Download Predictions\",\n",
-    "                        data=csv,\n",
-    "                        file_name=f\"stock_predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv\",\n",
-    "                        mime=\"text/csv\"\n",
-    "                    )\n",
-    "                    \n",
-    "            except Exception as e:\n",
-    "                st.error(f\"❌ Error generating predictions: {str(e)}\")\n",
-    "\n",
-    "# Results Analysis Page\n",
-    "elif page == \"📋 Results Analysis\":\n",
-    "    st.header(\"Results Analysis\")\n",
-    "    \n",
-    "    if not st.session_state.predictions_made:\n",
-    "        st.warning(\"⚠️ Please generate predictions first in the Predictions section.\")\n",
-    "    else:\n",
-    "        try:\n",
-    "            predictions = st.session_state.predictions\n",
-    "            actual_data = st.session_state.actual_data.copy()\n",
-    "            \n",
-    "            # Convert date in actual data\n",
-    "            actual_data[\"date\"] = pd.to_datetime(actual_data[\"date\"].astype(str), errors=\"coerce\")\n",
-    "            \n",
-    "            # Merge predictions with actual data\n",
-    "            if \"close\" in actual_data.columns:\n",
-    "                actual_data.rename(columns={\"close\": \"actual_close\"}, inplace=True)\n",
-    "                comparison_data = pd.merge(predictions, actual_data, on=\"date\", how=\"left\")\n",
-    "                \n",
-    "                # Filter valid data\n",
-    "                valid_data = comparison_data.dropna(subset=[\"actual_close\", \"predicted_close\"])\n",
-    "                \n",
-    "                if not valid_data.empty:\n",
-    "                    # Calculate metrics\n",
-    "                    mse = mean_squared_error(valid_data[\"actual_close\"], valid_data[\"predicted_close\"])\n",
-    "                    mae = mean_absolute_error(valid_data[\"actual_close\"], valid_data[\"predicted_close\"])\n",
-    "                    r2 = r2_score(valid_data[\"actual_close\"], valid_data[\"predicted_close\"])\n",
-    "                    \n",
-    "                    # Display metrics\n",
-    "                    st.subheader(\"📊 Model Performance Metrics\")\n",
-    "                    \n",
-    "                    col1, col2, col3 = st.columns(3)\n",
-    "                    \n",
-    "                    with col1:\n",
-    "                        st.metric(\"Mean Squared Error\", f\"{mse:.4f}\")\n",
-    "                    \n",
-    "                    with col2:\n",
-    "                        st.metric(\"Mean Absolute Error\", f\"{mae:.4f}\")\n",
-    "                    \n",
-    "                    with col3:\n",
-    "                        st.metric(\"R² Score\", f\"{r2:.4f}\")\n",
-    "                    \n",
-    "                    # Comparison chart\n",
-    "                    st.subheader(\"📈 Predicted vs Actual Prices\")\n",
-    "                    \n",
-    "                    fig = go.Figure()\n",
-    "                    fig.add_trace(go.Scatter(\n",
-    "                        x=valid_data[\"date\"],\n",
-    "                        y=valid_data[\"predicted_close\"],\n",
-    "                        mode='lines+markers',\n",
-    "                        name='Predicted',\n",
-    "                        line=dict(color='blue', width=2)\n",
-    "                    ))\n",
-    "                    fig.add_trace(go.Scatter(\n",
-    "                        x=valid_data[\"date\"],\n",
-    "                        y=valid_data[\"actual_close\"],\n",
-    "                        mode='lines+markers',\n",
-    "                        name='Actual',\n",
-    "                        line=dict(color='red', width=2)\n",
-    "                    ))\n",
-    "                    fig.update_layout(\n",
-    "                        title=\"Predicted vs Actual Stock Prices\",\n",
-    "                        xaxis_title=\"Date\",\n",
-    "                        yaxis_title=\"Stock Price\",\n",
-    "                        hovermode='x unified'\n",
-    "                    )\n",
-    "                    st.plotly_chart(fig, use_container_width=True)\n",
-    "                    \n",
-    "                    # Error analysis\n",
-    "                    st.subheader(\"📉 Error Analysis\")\n",
-    "                    \n",
-    "                    valid_data[\"error\"] = valid_data[\"actual_close\"] - valid_data[\"predicted_close\"]\n",
-    "                    valid_data[\"error_pct\"] = (valid_data[\"error\"] / valid_data[\"actual_close\"]) * 100\n",
-    "                    \n",
-    "                    fig_error = go.Figure()\n",
-    "                    fig_error.add_trace(go.Scatter(\n",
-    "                        x=valid_data[\"date\"],\n",
-    "                        y=valid_data[\"error\"],\n",
-    "                        mode='lines+markers',\n",
-    "                        name='Prediction Error',\n",
-    "                        line=dict(color='orange', width=2)\n",
-    "                    ))\n",
-    "                    fig_error.update_layout(\n",
-    "                        title=\"Prediction Error Over Time\",\n",
-    "                        xaxis_title=\"Date\",\n",
-    "                        yaxis_title=\"Error (Actual - Predicted)\",\n",
-    "                        hovermode='x unified'\n",
-    "                    )\n",
-    "                    st.plotly_chart(fig_error, use_container_width=True)\n",
-    "                    \n",
-    "                    # Statistical summary\n",
-    "                    st.subheader(\"📋 Statistical Summary\")\n",
-    "                    \n",
-    "                    summary_stats = valid_data[[\"actual_close\", \"predicted_close\", \"error\", \"error_pct\"]].describe()\n",
-    "                    st.dataframe(summary_stats)\n",
-    "                    \n",
-    "                    # Download comparison data\n",
-    "                    csv = valid_data.to_csv(index=False)\n",
-    "                    st.download_button(\n",
-    "                        label=\"📥 Download Comparison Data\",\n",
-    "                        data=csv,\n",
-    "                        file_name=f\"prediction_comparison_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv\",\n",
-    "                        mime=\"text/csv\"\n",
-    "                    )\n",
-    "                    \n",
-    "                else:\n",
-    "                    st.error(\"❌ No valid data available for comparison.\")\n",
-    "            else:\n",
-    "                st.error(\"❌ 'close' column not found in actual data.\")\n",
-    "                \n",
-    "        except Exception as e:\n",
-    "            st.error(f\"❌ Error in results analysis: {str(e)}\")\n",
-    "\n",
-    "# Footer\n",
-    "st.markdown(\"---\")\n",
-    "st.markdown(\"*Built with Streamlit • Powered by TensorFlow & Transformers*\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "bfe6da94-7b2d-4f5a-bce3-dcd7e38cc6d0",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.10.16"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+    .metric-card {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #1f77b4;
+    }
+    .success-message {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #28a745;
+    }
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #dc3545;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Initialize session state
+if 'model_trained' not in st.session_state:
+    st.session_state.model_trained = False
+if 'predictions_made' not in st.session_state:
+    st.session_state.predictions_made = False
+if 'scaler' not in st.session_state:
+    st.session_state.scaler = None
+if 'model' not in st.session_state:
+    st.session_state.model = None
+
+# Main title
+st.markdown('<div class="main-header">📈 Stock Price Prediction Dashboard</div>', unsafe_allow_html=True)
+
+# Sidebar for navigation
+st.sidebar.title("Navigation")
+page = st.sidebar.selectbox(
+    "Choose a section:",
+    ["📊 Dashboard", "🔄 Data Processing", "🤖 Model Training", "📈 Predictions", "📋 Results Analysis"]
+)
+
+# Check if all required libraries are available
+ALL_LIBRARIES_AVAILABLE = all([TF_AVAILABLE, TRANSFORMERS_AVAILABLE, PLOTTING_AVAILABLE, SKLEARN_AVAILABLE])
+
+if not ALL_LIBRARIES_AVAILABLE:
+    st.error("Some required libraries are missing. Please install all dependencies.")
+    st.stop()
+
+# Helper functions
+@st.cache_data
+def load_csv_file(file_path):
+    """Load CSV file and standardize column names"""
+    try:
+        df = pd.read_csv(file_path)
+        df.columns = df.columns.str.strip().str.lower()
+        return df
+    except Exception as e:
+        st.error(f"Error loading {file_path}: {str(e)}")
+        return None
+
+@st.cache_resource
+def load_sentiment_model():
+    """Load sentiment analysis model"""
+    if not TRANSFORMERS_AVAILABLE:
+        st.error("Transformers library not available")
+        return None
+    try:
+        device = -1 if not torch.cuda.is_available() else 0
+        return pipeline("sentiment-analysis", 
+                       model="distilbert-base-uncased-finetuned-sst-2-english", 
+                       device=device)
+    except Exception as e:
+        st.error(f"Error loading sentiment model: {str(e)}")
+        return None
+
+def get_sentiment(text, sentiment_pipeline):
+    """Get sentiment score for text"""
+    try:
+        result = sentiment_pipeline(text)[0]["label"]
+        return 1 if result == "POSITIVE" else (-1 if result == "NEGATIVE" else 0)
+    except Exception:
+        return 0
+
+def build_lstm_model(input_shape):
+    """Build LSTM model"""
+    if not TF_AVAILABLE:
+        st.error("TensorFlow not available")
+        return None
+    
+    model = Sequential([
+        LSTM(256, input_shape=input_shape, return_sequences=False),
+        Dense(128, activation="relu"),
+        Dense(64, activation="relu"),
+        Dense(1)
+    ])
+    model.compile(loss="mean_squared_error", optimizer="adam")
+    return model
+
+# Dashboard Page
+if page == "📊 Dashboard":
+    st.header("Welcome to Stock Price Prediction Dashboard")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>🎯 Purpose</h3>
+            <p>Predict stock prices using LSTM neural networks and sentiment analysis from news data.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>🔧 Features</h3>
+            <p>• LSTM Deep Learning Model<br>
+            • Sentiment Analysis<br>
+            • Technical Indicators<br>
+            • Interactive Visualizations</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class="metric-card">
+            <h3>📈 Workflow</h3>
+            <p>1. Load Data<br>
+            2. Process & Analyze<br>
+            3. Train Model<br>
+            4. Make Predictions</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.subheader("Quick Start Guide")
+    st.markdown("""
+    1. **Data Processing**: Upload your CSV files and process the data
+    2. **Model Training**: Train the LSTM model on historical stock data
+    3. **Predictions**: Generate predictions for new data
+    4. **Results Analysis**: View and analyze the results
+    """)
+    
+    # System Information
+    st.subheader("System Information")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if TF_AVAILABLE and torch.cuda.is_available():
+            device = "GPU (CUDA)"
+        else:
+            device = "CPU"
+        st.info(f"🖥️ Computing Device: {device}")
+    
+    with col2:
+        if TF_AVAILABLE:
+            tf_version = tf.__version__
+            st.info(f"🧠 TensorFlow Version: {tf_version}")
+        else:
+            st.info("🧠 TensorFlow: Not Available")
+
+# Data Processing Page
+elif page == "🔄 Data Processing":
+    st.header("Data Processing & Loading")
+    
+    # File upload section
+    st.subheader("📁 Upload Data Files")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        stock_file = st.file_uploader("Upload Stock Data CSV", type=['csv'], key="stock")
+        news_file = st.file_uploader("Upload News Data CSV", type=['csv'], key="news")
+    
+    with col2:
+        new_news_file = st.file_uploader("Upload New News Data CSV", type=['csv'], key="new_news")
+        actual_file = st.file_uploader("Upload Actual Data CSV", type=['csv'], key="actual")
+    
+    # Process uploaded files
+    if st.button("🔄 Process Data", type="primary"):
+        if all([stock_file, news_file, new_news_file, actual_file]):
+            try:
+                # Load data
+                stock_data = pd.read_csv(stock_file)
+                news_data = pd.read_csv(news_file)
+                new_news_data = pd.read_csv(new_news_file)
+                actual_data = pd.read_csv(actual_file)
+                
+                # Standardize column names
+                for df in [stock_data, news_data, new_news_data, actual_data]:
+                    df.columns = df.columns.str.strip().str.lower()
+                
+                # Store in session state
+                st.session_state.stock_data = stock_data
+                st.session_state.news_data = news_data
+                st.session_state.new_news_data = new_news_data
+                st.session_state.actual_data = actual_data
+                
+                st.success("✅ Data loaded successfully!")
+                
+                # Display data info
+                st.subheader("📊 Data Overview")
+                
+                tab1, tab2, tab3, tab4 = st.tabs(["Stock Data", "News Data", "New News Data", "Actual Data"])
+                
+                with tab1:
+                    st.write(f"**Shape:** {stock_data.shape}")
+                    st.write(f"**Columns:** {stock_data.columns.tolist()}")
+                    st.dataframe(stock_data.head())
+                
+                with tab2:
+                    st.write(f"**Shape:** {news_data.shape}")
+                    st.write(f"**Columns:** {news_data.columns.tolist()}")
+                    st.dataframe(news_data.head())
+                
+                with tab3:
+                    st.write(f"**Shape:** {new_news_data.shape}")
+                    st.write(f"**Columns:** {new_news_data.columns.tolist()}")
+                    st.dataframe(new_news_data.head())
+                
+                with tab4:
+                    st.write(f"**Shape:** {actual_data.shape}")
+                    st.write(f"**Columns:** {actual_data.columns.tolist()}")
+                    st.dataframe(actual_data.head())
+                
+            except Exception as e:
+                st.error(f"❌ Error processing data: {str(e)}")
+        else:
+            st.warning("⚠️ Please upload all required CSV files.")
+
+# Model Training Page
+elif page == "🤖 Model Training":
+    st.header("Model Training")
+    
+    if 'stock_data' not in st.session_state:
+        st.warning("⚠️ Please load data first in the Data Processing section.")
+    else:
+        stock_data = st.session_state.stock_data.copy()
+        news_data = st.session_state.news_data.copy()
+        
+        # Data preprocessing
+        st.subheader("📊 Data Preprocessing")
+        
+        with st.expander("View Preprocessing Steps"):
+            st.write("1. Convert date columns to datetime format")
+            st.write("2. Filter stock data from 2019-2024")
+            st.write("3. Add technical indicators")
+            st.write("4. Perform sentiment analysis on news data")
+            st.write("5. Merge stock and news data")
+            st.write("6. Scale features")
+        
+        if st.button("🔄 Start Preprocessing", type="primary"):
+            progress_bar = st.progress(0)
+            status_text = st.empty()
+            
+            try:
+                # Convert dates
+                status_text.text("Converting date formats...")
+                progress_bar.progress(20)
+                
+                for df in [stock_data, news_data]:
+                    df["date"] = pd.to_datetime(df["date"].astype(str), errors="coerce")
+                
+                # Filter stock data
+                stock_data = stock_data[stock_data["date"] >= "2019-01-01"]
+                progress_bar.progress(40)
+                
+                # Add technical indicators
+                status_text.text("Adding technical indicators...")
+                stock_data["daily_change"] = stock_data["close"] - stock_data["open"]
+                stock_data["volatility"] = stock_data["high"] - stock_data["low"]
+                stock_data["50_day_MA"] = stock_data["close"].rolling(window=50).mean()
+                stock_data["200_day_MA"] = stock_data["close"].rolling(window=200).mean()
+                stock_data.fillna(0, inplace=True)
+                progress_bar.progress(60)
+                
+                # Sentiment analysis
+                status_text.text("Performing sentiment analysis...")
+                sentiment_pipeline = load_sentiment_model()
+                
+                if sentiment_pipeline:
+                    news_data["sentiment"] = news_data["news_summary"].apply(
+                        lambda x: get_sentiment(x, sentiment_pipeline)
+                    )
+                    news_data = news_data.groupby("date").agg({"sentiment": "mean"}).reset_index()
+                    progress_bar.progress(80)
+                    
+                    # Merge data
+                    status_text.text("Merging datasets...")
+                    merged_data = pd.merge(stock_data, news_data, on="date", how="left").fillna(0)
+                    
+                    # Prepare features
+                    features = ["sentiment", "volume", "daily_change", "volatility", "50_day_MA", "200_day_MA"]
+                    X_train = merged_data[features]
+                    y_train = merged_data["close"]
+                    
+                    # Scale features
+                    scaler = StandardScaler()
+                    X_train_scaled = scaler.fit_transform(X_train)
+                    X_train_scaled = np.reshape(X_train_scaled, (X_train_scaled.shape[0], 1, X_train_scaled.shape[1]))
+                    
+                    st.session_state.X_train = X_train_scaled
+                    st.session_state.y_train = y_train
+                    st.session_state.scaler = scaler
+                    st.session_state.features = features
+                    
+                    progress_bar.progress(100)
+                    status_text.text("Preprocessing completed!")
+                    
+                    st.success("✅ Data preprocessing completed successfully!")
+                    
+                    # Display preprocessing results
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric("Training Samples", len(X_train_scaled))
+                    
+                    with col2:
+                        st.metric("Features", len(features))
+                    
+                    with col3:
+                        st.metric("Date Range", f"{merged_data['date'].min().strftime('%Y-%m-%d')} to {merged_data['date'].max().strftime('%Y-%m-%d')}")
+                
+            except Exception as e:
+                st.error(f"❌ Error during preprocessing: {str(e)}")
+        
+        # Model training section
+        if 'X_train' in st.session_state:
+            st.subheader("🧠 LSTM Model Training")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                epochs = st.slider("Number of Epochs", 50, 300, 150)
+                batch_size = st.selectbox("Batch Size", [16, 32, 64, 128], index=1)
+            
+            with col2:
+                lstm_units = st.slider("LSTM Units", 128, 512, 256)
+                dense_units = st.slider("Dense Units", 64, 256, 128)
+            
+            if st.button("🚀 Train Model", type="primary"):
+                try:
+                    # Build model
+                    model = Sequential([
+                        LSTM(lstm_units, input_shape=(1, len(st.session_state.features)), return_sequences=False),
+                        Dense(dense_units, activation="relu"),
+                        Dense(64, activation="relu"),
+                        Dense(1)
+                    ])
+                    model.compile(loss="mean_squared_error", optimizer="adam")
+                    
+                    # Training progress
+                    progress_bar = st.progress(0)
+                    status_text = st.empty()
+                    
+                    # Custom callback for progress
+                    class StreamlitCallback(tf.keras.callbacks.Callback):
+                        def on_epoch_end(self, epoch, logs=None):
+                            progress = (epoch + 1) / epochs
+                            progress_bar.progress(progress)
+                            status_text.text(f"Training... Epoch {epoch + 1}/{epochs} - Loss: {logs['loss']:.4f}")
+                    
+                    # Train model
+                    history = model.fit(
+                        st.session_state.X_train, 
+                        st.session_state.y_train,
+                        epochs=epochs,
+                        batch_size=batch_size,
+                        verbose=0,
+                        callbacks=[StreamlitCallback()]
+                    )
+                    
+                    st.session_state.model = model
+                    st.session_state.model_trained = True
+                    st.session_state.training_history = history.history
+                    
+                    st.success("✅ Model trained successfully!")
+                    
+                    # Display training results
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        y=history.history['loss'],
+                        mode='lines',
+                        name='Training Loss',
+                        line=dict(color='blue')
+                    ))
+                    fig.update_layout(
+                        title="Training Loss Over Time",
+                        xaxis_title="Epoch",
+                        yaxis_title="Loss"
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                except Exception as e:
+                    st.error(f"❌ Error during training: {str(e)}")
+
+# Predictions Page
+elif page == "📈 Predictions":
+    st.header("Stock Price Predictions")
+    
+    if not st.session_state.model_trained:
+        st.warning("⚠️ Please train the model first in the Model Training section.")
+    else:
+        if st.button("🔮 Generate Predictions", type="primary"):
+            try:
+                new_news_data = st.session_state.new_news_data.copy()
+                
+                # Convert date
+                new_news_data["date"] = pd.to_datetime(new_news_data["date"].astype(str), errors="coerce")
+                
+                # Sentiment analysis
+                sentiment_pipeline = load_sentiment_model()
+                if sentiment_pipeline:
+                    new_news_data["sentiment"] = new_news_data["news_summary"].apply(
+                        lambda x: get_sentiment(x, sentiment_pipeline)
+                    )
+                    new_news_data = new_news_data.groupby("date").agg({"sentiment": "mean"}).reset_index()
+                    
+                    # Add last known stock features
+                    latest_stock_data = st.session_state.stock_data.iloc[-1]
+                    for col in ["volume", "daily_change", "volatility", "50_day_MA", "200_day_MA"]:
+                        new_news_data[col] = latest_stock_data[col]
+                    
+                    # Scale and predict
+                    X_test = st.session_state.scaler.transform(new_news_data[st.session_state.features])
+                    X_test = np.reshape(X_test, (X_test.shape[0], 1, X_test.shape[1]))
+                    
+                    predicted_prices = st.session_state.model.predict(X_test)
+                    new_news_data["predicted_close"] = predicted_prices
+                    
+                    st.session_state.predictions = new_news_data
+                    st.session_state.predictions_made = True
+                    
+                    st.success("✅ Predictions generated successfully!")
+                    
+                    # Display predictions
+                    st.subheader("📊 Prediction Results")
+                    
+                    # Create prediction chart
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=new_news_data["date"],
+                        y=new_news_data["predicted_close"],
+                        mode='lines+markers',
+                        name='Predicted Close Price',
+                        line=dict(color='blue', width=2)
+                    ))
+                    fig.update_layout(
+                        title="Predicted Stock Prices",
+                        xaxis_title="Date",
+                        yaxis_title="Stock Price",
+                        hovermode='x unified'
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Display prediction table
+                    st.dataframe(new_news_data[["date", "sentiment", "predicted_close"]])
+                    
+                    # Download predictions
+                    csv = new_news_data.to_csv(index=False)
+                    st.download_button(
+                        label="📥 Download Predictions",
+                        data=csv,
+                        file_name=f"stock_predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                        mime="text/csv"
+                    )
+                    
+            except Exception as e:
+                st.error(f"❌ Error generating predictions: {str(e)}")
+
+# Results Analysis Page
+elif page == "📋 Results Analysis":
+    st.header("Results Analysis")
+    
+    if not st.session_state.predictions_made:
+        st.warning("⚠️ Please generate predictions first in the Predictions section.")
+    else:
+        try:
+            predictions = st.session_state.predictions
+            actual_data = st.session_state.actual_data.copy()
+            
+            # Convert date in actual data
+            actual_data["date"] = pd.to_datetime(actual_data["date"].astype(str), errors="coerce")
+            
+            # Merge predictions with actual data
+            if "close" in actual_data.columns:
+                actual_data.rename(columns={"close": "actual_close"}, inplace=True)
+                comparison_data = pd.merge(predictions, actual_data, on="date", how="left")
+                
+                # Filter valid data
+                valid_data = comparison_data.dropna(subset=["actual_close", "predicted_close"])
+                
+                if not valid_data.empty:
+                    # Calculate metrics
+                    mse = mean_squared_error(valid_data["actual_close"], valid_data["predicted_close"])
+                    mae = mean_absolute_error(valid_data["actual_close"], valid_data["predicted_close"])
+                    r2 = r2_score(valid_data["actual_close"], valid_data["predicted_close"])
+                    
+                    # Display metrics
+                    st.subheader("📊 Model Performance Metrics")
+                    
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric("Mean Squared Error", f"{mse:.4f}")
+                    
+                    with col2:
+                        st.metric("Mean Absolute Error", f"{mae:.4f}")
+                    
+                    with col3:
+                        st.metric("R² Score", f"{r2:.4f}")
+                    
+                    # Comparison chart
+                    st.subheader("📈 Predicted vs Actual Prices")
+                    
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=valid_data["date"],
+                        y=valid_data["predicted_close"],
+                        mode='lines+markers',
+                        name='Predicted',
+                        line=dict(color='blue', width=2)
+                    ))
+                    fig.add_trace(go.Scatter(
+                        x=valid_data["date"],
+                        y=valid_data["actual_close"],
+                        mode='lines+markers',
+                        name='Actual',
+                        line=dict(color='red', width=2)
+                    ))
+                    fig.update_layout(
+                        title="Predicted vs Actual Stock Prices",
+                        xaxis_title="Date",
+                        yaxis_title="Stock Price",
+                        hovermode='x unified'
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Error analysis
+                    st.subheader("📉 Error Analysis")
+                    
+                    valid_data["error"] = valid_data["actual_close"] - valid_data["predicted_close"]
+                    valid_data["error_pct"] = (valid_data["error"] / valid_data["actual_close"]) * 100
+                    
+                    fig_error = go.Figure()
+                    fig_error.add_trace(go.Scatter(
+                        x=valid_data["date"],
+                        y=valid_data["error"],
+                        mode='lines+markers',
+                        name='Prediction Error',
+                        line=dict(color='orange', width=2)
+                    ))
+                    fig_error.update_layout(
+                        title="Prediction Error Over Time",
+                        xaxis_title="Date",
+                        yaxis_title="Error (Actual - Predicted)",
+                        hovermode='x unified'
+                    )
+                    st.plotly_chart(fig_error, use_container_width=True)
+                    
+                    # Statistical summary
+                    st.subheader("📋 Statistical Summary")
+                    
+                    summary_stats = valid_data[["actual_close", "predicted_close", "error", "error_pct"]].describe()
+                    st.dataframe(summary_stats)
+                    
+                    # Download comparison data
+                    csv = valid_data.to_csv(index=False)
+                    st.download_button(
+                        label="📥 Download Comparison Data",
+                        data=csv,
+                        file_name=f"prediction_comparison_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                        mime="text/csv"
+                    )
+                    
+                else:
+                    st.error("❌ No valid data available for comparison.")
+            else:
+                st.error("❌ 'close' column not found in actual data.")
+                
+        except Exception as e:
+            st.error(f"❌ Error in results analysis: {str(e)}")
+
+# Footer
+st.markdown("---")
+st.markdown("*Built with Streamlit • Powered by TensorFlow & Transformers*")
