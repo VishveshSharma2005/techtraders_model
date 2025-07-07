@@ -3,6 +3,7 @@ numpy
 pandas
 matplotlib
 scikit-learn
+streamlit
 
 # Deep Learning & AI Models
 tensorflow
